@@ -9,6 +9,7 @@ public class Client {
 
     private String lastResult;
     StringBuilder sb = null;
+    private final ServerConnection conn = null;
 
     public Client() {
         lastResult = "";
