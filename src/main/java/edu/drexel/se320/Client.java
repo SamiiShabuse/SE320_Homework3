@@ -9,10 +9,14 @@ public class Client {
 
     private String lastResult;
     StringBuilder sb = null;
-    private final ServerConnection conn = null;
+    private ServerConnection conn = null;
 
-    public Client() {
-        lastResult = "";
+    public Client(ServerConnection conn) {
+        if (conn == null) {
+            throw new IllegalArgumentException("ServerConnection cannot be null!");
+        }
+        this.conn = conn;
+        this.lastResult = "";
     }
 
     public String requestFile(String server, String file) {
