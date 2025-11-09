@@ -2,6 +2,8 @@ package edu.drexel.se320;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import java.util.List;
 import java.io.IOException;
@@ -27,12 +29,14 @@ public class MockTests {
 
     @Test
     public void testServerConnectionFailureGivesNull() throws IOException {
-        Client c = new Client();
         ServerConnection sc = mock(ServerConnection.class);
         when(sc.connectTo(anyString())).thenReturn(false);
 
-        // If you change the code to pass the mock above to the client (based on your choice of
-        // refactoring), this test should pass.  Until then, it will fail.
-        assertNull(c.requestFile("DUMMY", "DUMMY"));
+        Client c = new Client(sc);
+        String result = c.requestFile("dummyServer", "dummyFile");
+
+        verify(sc).connectTo("dummyServer");
+        verify(sc, never()).requestFileContents(anyString());
+        assertNull(result);
     }
 }
