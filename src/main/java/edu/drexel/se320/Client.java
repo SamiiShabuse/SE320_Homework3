@@ -3,7 +3,6 @@ package edu.drexel.se320;
 import java.io.IOException;
 import java.lang.IllegalArgumentException;
 import java.lang.StringBuilder;
-import java.lang.UnsupportedOperationException;
 
 public class Client {
 
@@ -25,31 +24,6 @@ public class Client {
         if (file == null)
             throw new IllegalArgumentException("Null file");
 
-	// This ServerConnection is here only as a placeholder --- the real dependency
-	// doesn't exist yet.  Your tests will need to make sure the code below this
-	// definition of conn interacts with connections correctly despite not having
-	// a real ServerConnection.
-	//
-	// To be clear: do NOT implement the methods below.  Instead, make it possible
-	// to run the code below with a mock, rather than this dummy implementation.
-        ServerConnection conn = new ServerConnection() {
-            public boolean connectTo(String address) throws IOException {
-                throw new UnsupportedOperationException();
-            }
-            public boolean requestFileContents(String filename) throws IOException {
-                throw new UnsupportedOperationException();
-            }
-            public String read() throws IOException {
-                throw new UnsupportedOperationException();
-            }
-            public boolean moreBytes() throws IOException {
-                throw new UnsupportedOperationException();
-            }
-            public void closeConnection() throws IOException {
-                throw new UnsupportedOperationException();
-            }
-        };
-
 	// We'll use a StringBuilder to construct large strings more efficiently
 	// than repeated linear calls to string concatenation.
         sb = new StringBuilder();
@@ -65,6 +39,10 @@ public class Client {
                         }
                     }
                     conn.closeConnection();
+                } else {
+                    // If there is an invalid file, close connection and return null
+                    conn.closeConnection();
+                    return null;
                 }
             } else {
                 return null;
@@ -76,6 +54,11 @@ public class Client {
         String result = sb.toString();
         lastResult = result;
         return result;
+    }
+
+    // Getter for Testing
+    public String getLastResult() {
+        return lastResult;
     }
 }
 
