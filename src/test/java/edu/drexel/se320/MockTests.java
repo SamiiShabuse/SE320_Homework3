@@ -5,8 +5,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import org.mockito.InOrder;
+
 import java.util.List;
+import java.io.IO;
 import java.io.IOException;
+import java.security.KeyStore.SecretKeyEntry;
 
 public class MockTests {
 
@@ -97,5 +101,126 @@ public class MockTests {
     }
 
     @Test
+    public void testIOExceptionDuringRead() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo(anyString())).thenReturn(true);
+        when(sc.requestFileContents(anyString())).thenReturn(true);
+        when(sc.moreBytes()).thenReturn(true);
+        when(sc.read()).thenThrow(new IOException());
+
+
+        Client c = new Client(sc);
+        assertNull(c.requestFile("server", "file"));
+    }
     
+    @Test
+    public void testNullServerThrowsException() {
+        ServerConnection sc = mock(ServerConnection.class);
+        Client c  = new Client(sc);
+
+        assertThrows(IllegalArgumentException.class, () -> c.requestFile(null, "file"));
+    }
+
+    @Test
+    public void testNullFileThrowsException() {
+        ServerConnection sc = mock(ServerConnection.class);
+        Client c = new Client(sc);
+
+        assertThrows(IllegalArgumentException.class, () -> c.requestFile("server", null));
+    }
+
+    @Test
+    public void testCloseConnectionAlwaysCalledOnValidFIle() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo(anyString())).thenReturn(true);
+        when(sc.requestFileContents(anyString())).thenReturn(true);
+        when(sc.moreBytes()).thenReturn(false);
+
+        Client c = new Client(sc);
+        c.requestFile("server", "file");
+
+        verify(sc).closeConnection();
+    }
+
+    @Test
+    public void testnullReadSkipped() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo(anyString())).thenReturn(true);
+        when(sc.requestFileContents(anyString())).thenReturn(true);
+        when(sc.moreBytes()).thenReturn(true, true, false);
+        when(sc.read()).thenReturn(null, "Data");
+
+
+        Client c = new Client(sc);
+        String result = c.requestFile("server", "file");
+
+        assertEquals("Data", result);
+    }
+
+    @Test
+    public void testEmptyFileStillClosesConnection() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo(anyString())).thenReturn(true);
+        when(sc.requestFileContents(anyString())).thenReturn(true);
+        when(sc.moreBytes()).thenReturn(false);
+
+        Client c = new Client(sc);
+        String result = c.requestFile("server", "empty.txt");
+
+        verify(sc).closeConnection();
+        assertEquals("", result);
+    }
+
+    @Test
+    public void testIOExceptionDuringClose() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo(anyString())).thenReturn(true);
+        when(sc.requestFileContents(anyString())).thenReturn(true);
+        when(sc.moreBytes()).thenReturn(true, false);
+        when(sc.read()).thenReturn("OK");
+        doThrow(new IOException()).when(sc).closeConnection();
+
+        Client c = new Client(sc);
+        String result = c.requestFile("server", "file");
+
+        // This works because result shouldn't change after read
+        assertEquals("OK", result);
+    }
+
+    @Test
+    public void testNoReadOnInvalidFile() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo(anyString())).thenReturn(true);
+        when(sc.requestFileContents(anyString())).thenReturn(false);
+
+        Client c = new Client(sc);
+        c.requestFile("server", "badfile");
+        verify(sc, never()).read();
+    }
+
+    @Test
+    public void testInteractionOrder() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo("s")).thenReturn(true);
+        when(sc.requestFileContents("f")).thenReturn(true);
+        when(sc.moreBytes()).thenReturn(true, false);
+        when(sc.read()).thenReturn("X");
+        
+        Client c = new Client(sc);
+
+        c.requestFile("s", "f");
+
+        InOrder inOrder = inOrder(sc);
+        inOrder.verify(sc).connectTo("s");
+        inOrder.verify(sc).requestFileContents("f");
+        inOrder.verify(sc).moreBytes();
+        inOrder.verify(sc).read();
+        inOrder.verify(sc).moreBytes();
+        inOrder.verify(sc).closeConnection();
+    }
+
+    @Test
+    public void testNoReadsOrCloseWhenConnectFails() throws IOException {
+        
+    }
 }
