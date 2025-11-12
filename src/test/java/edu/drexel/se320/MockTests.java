@@ -8,9 +8,7 @@ import static org.mockito.Mockito.*;
 import org.mockito.InOrder;
 
 import java.util.List;
-import java.io.IO;
 import java.io.IOException;
-import java.security.KeyStore.SecretKeyEntry;
 
 public class MockTests {
 
@@ -183,8 +181,7 @@ public class MockTests {
         Client c = new Client(sc);
         String result = c.requestFile("server", "file");
 
-        // This works because result shouldn't change after read
-        assertEquals("OK", result);
+        assertNull(result);
     }
 
     @Test
@@ -221,6 +218,45 @@ public class MockTests {
 
     @Test
     public void testNoReadsOrCloseWhenConnectFails() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo("s")).thenReturn(false);
+        Client c = new Client(sc);
+
+        c.requestFile("s","f");
+        InOrder inOrder = inOrder(sc);
+        inOrder.verify(sc, never()).requestFileContents(anyString());
+        inOrder.verify(sc, never()).moreBytes();
+        inOrder.verify(sc, never()).read();
+        inOrder.verify(sc, never()).closeConnection();
+    }
+
+    @Test
+    public void testNoReadsWhenRequestDenied() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo("s")).thenReturn(true);
+        when(sc.requestFileContents("f")).thenReturn(false);
+        Client c = new Client(sc);
+
+        c.requestFile("s", "f");
+
+        InOrder inOrder = inOrder(sc);
+        inOrder.verify(sc, never()).moreBytes();
+        inOrder.verify(sc, never()).read();
+        inOrder.verify(sc).closeConnection();
+    }
+
+    @Test
+    public void testEmptyStringReadIsPreserved() throws IOException {
+        ServerConnection sc = mock(ServerConnection.class);
+        when(sc.connectTo("s")).thenReturn(true);
+        when(sc.requestFileContents("f")).thenReturn(true);
+        when(sc.moreBytes()).thenReturn(true, true, false);
+        when(sc.read()).thenReturn("", "X");
         
+        Client c = new Client(sc);
+
+        String result = c.requestFile("s", "f");
+
+        assertEquals("X", result);
     }
 }
