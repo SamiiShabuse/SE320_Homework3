@@ -39,11 +39,8 @@ public class Client {
                         }
                     }
                     conn.closeConnection();
-                } else {
-                    // If there is an invalid file, close connection and return null
-                    conn.closeConnection();
-                    return null;
-                }
+                } 
+                    // NOTE: preserving the original behavior leaving bug based on assignment instruction
             } else {
                 return null;
             }
