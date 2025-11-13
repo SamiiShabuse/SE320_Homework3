@@ -23,13 +23,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">18</div>
+<div class="counter">15</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">2</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.533s</div>
+<div class="counter">0.595s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">86%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,12 +61,61 @@
 <div class="tab-container">
 <ul class="tabLinks">
 <li>
+<a href="#">Failed tests</a>
+</li>
+<li>
 <a href="#">Tests</a>
 </li>
 <li>
 <a href="#">Standard error</a>
 </li>
 </ul>
+<div class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="test2()"></a>
+<h3 class="failures">test2()</h3>
+<span class="code">
+<pre id="test-message-test2()">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;&gt;
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at app//org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:56)
+	at app//org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:40)
+	at app//org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:34)
+	at app//org.junit.jupiter.api.Assertions.assertNull(Assertions.java:297)
+	at app//edu.drexel.se320.MockTests.test2(MockTests.java:81)
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="test-message-test2()">Copy</button>
+</span>
+</div>
+<div class="test">
+<a name="test6()"></a>
+<h3 class="failures">test6()</h3>
+<span class="code">
+<pre id="test-message-test6()">Wanted but not invoked:
+serverConnection.closeConnection();
+-&gt; at edu.drexel.se320.MockTests.test6(MockTests.java:173)
+
+However, there were exactly 4 interactions with this mock:
+serverConnection.connectTo(&quot;s&quot;);
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:32)
+
+serverConnection.requestFileContents(&quot;f&quot;);
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:33)
+
+serverConnection.moreBytes();
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:35)
+
+serverConnection.read();
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:36)
+
+
+	at app//edu.drexel.se320.MockTests.test6(MockTests.java:173)
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="test-message-test6()">Copy</button>
+</span>
+</div>
+</div>
 <div class="tab">
 <h2>Tests</h2>
 <table>
@@ -78,93 +127,78 @@
 </tr>
 </thead>
 <tr>
-<td class="success">testCloseConnectionAlwaysCalledOnValidFIle()</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testEmptyFileStillClosesConnection()</td>
+<td class="success">test1()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testEmptyStringReadIsPreserved()</td>
+<td class="success">test10a()</td>
+<td class="success">0.475s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">test10b()</td>
+<td class="success">0.007s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">test10c()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testIOExceptionDuringClose()</td>
+<td class="success">test10d()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">test10e()</td>
 <td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testIOExceptionDuringConnect()</td>
+<td class="failures">test2()</td>
+<td class="failures">0.006s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="success">test3()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">test4()</td>
 <td class="success">0s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testIOExceptionDuringRead()</td>
-<td class="success">0.439s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testInteractionOrder()</td>
+<td class="success">test5()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">testInvalidFileReturnsNull()</td>
+<td class="failures">test6()</td>
+<td class="failures">0.008s</td>
+<td class="failures">failed</td>
+</tr>
+<tr>
+<td class="success">test7()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">test8()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">test9()</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testMockDemo()</td>
-<td class="success">0.071s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testMultipleReadsConcatenated()</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testNoReadOnInvalidFile()</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testNoReadsOrCloseWhenConnectFails()</td>
-<td class="success">0.006s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testNoReadsWhenRequestDenied()</td>
-<td class="success">0.002s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testNullFileThrowsException()</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testNullServerThrowsException()</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testServerConnectionFailureGivesNull()</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testSuccessfulDownload()</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">testnullReadSkipped()</td>
-<td class="success">0.005s</td>
+<td class="success">0.083s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -189,7 +223,7 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.2.0</a> at Nov 12, 2025, 1:27:49 AM</p>
+<a href="https://www.gradle.org">Gradle 9.2.0</a> at Nov 12, 2025, 9:28:04 PM</p>
 </div>
 </div>
 </body>

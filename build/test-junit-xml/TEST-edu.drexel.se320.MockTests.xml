@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.drexel.se320.MockTests" tests="18" skipped="0" failures="0" errors="0" timestamp="2025-11-12T06:27:48.954Z" hostname="SAMIIWORKAHOLIC" time="0.537">
+<testsuite name="edu.drexel.se320.MockTests" tests="15" skipped="0" failures="2" errors="0" timestamp="2025-11-13T02:28:04.243Z" hostname="SAMIIWORKAHOLIC" time="0.601">
   <properties/>
-  <testcase name="testIOExceptionDuringRead()" classname="edu.drexel.se320.MockTests" time="0.439"/>
-  <testcase name="testnullReadSkipped()" classname="edu.drexel.se320.MockTests" time="0.005"/>
-  <testcase name="testIOExceptionDuringConnect()" classname="edu.drexel.se320.MockTests" time="0.0"/>
-  <testcase name="testNoReadsOrCloseWhenConnectFails()" classname="edu.drexel.se320.MockTests" time="0.006"/>
-  <testcase name="testIOExceptionDuringClose()" classname="edu.drexel.se320.MockTests" time="0.002"/>
-  <testcase name="testNullFileThrowsException()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testNoReadsWhenRequestDenied()" classname="edu.drexel.se320.MockTests" time="0.002"/>
-  <testcase name="testMockDemo()" classname="edu.drexel.se320.MockTests" time="0.071"/>
-  <testcase name="testServerConnectionFailureGivesNull()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testInteractionOrder()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testCloseConnectionAlwaysCalledOnValidFIle()" classname="edu.drexel.se320.MockTests" time="0.0"/>
-  <testcase name="testNullServerThrowsException()" classname="edu.drexel.se320.MockTests" time="0.0"/>
-  <testcase name="testInvalidFileReturnsNull()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testSuccessfulDownload()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testEmptyStringReadIsPreserved()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testNoReadOnInvalidFile()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testEmptyFileStillClosesConnection()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testMultipleReadsConcatenated()" classname="edu.drexel.se320.MockTests" time="0.0"/>
+  <testcase name="test10a()" classname="edu.drexel.se320.MockTests" time="0.475"/>
+  <testcase name="test10b()" classname="edu.drexel.se320.MockTests" time="0.007"/>
+  <testcase name="test10c()" classname="edu.drexel.se320.MockTests" time="0.001"/>
+  <testcase name="test10d()" classname="edu.drexel.se320.MockTests" time="0.001"/>
+  <testcase name="test10e()" classname="edu.drexel.se320.MockTests" time="0.002"/>
+  <testcase name="testMockDemo()" classname="edu.drexel.se320.MockTests" time="0.083"/>
+  <testcase name="test1()" classname="edu.drexel.se320.MockTests" time="0.001"/>
+  <testcase name="test2()" classname="edu.drexel.se320.MockTests" time="0.006">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;&gt;
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at app//org.junit.jupiter.api.AssertNull.failNotNull(AssertNull.java:56)
+	at app//org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:40)
+	at app//org.junit.jupiter.api.AssertNull.assertNull(AssertNull.java:34)
+	at app//org.junit.jupiter.api.Assertions.assertNull(Assertions.java:297)
+	at app//edu.drexel.se320.MockTests.test2(MockTests.java:81)
+</failure>
+  </testcase>
+  <testcase name="test3()" classname="edu.drexel.se320.MockTests" time="0.003"/>
+  <testcase name="test4()" classname="edu.drexel.se320.MockTests" time="0.0"/>
+  <testcase name="test5()" classname="edu.drexel.se320.MockTests" time="0.001"/>
+  <testcase name="test6()" classname="edu.drexel.se320.MockTests" time="0.008">
+    <failure message="Wanted but not invoked:&#10;serverConnection.closeConnection();&#10;-&gt; at edu.drexel.se320.MockTests.test6(MockTests.java:173)&#10;&#10;However, there were exactly 4 interactions with this mock:&#10;serverConnection.connectTo(&quot;s&quot;);&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:32)&#10;&#10;serverConnection.requestFileContents(&quot;f&quot;);&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:33)&#10;&#10;serverConnection.moreBytes();&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:35)&#10;&#10;serverConnection.read();&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:36)&#10;&#10;" type="org.mockito.exceptions.verification.WantedButNotInvoked">Wanted but not invoked:
+serverConnection.closeConnection();
+-&gt; at edu.drexel.se320.MockTests.test6(MockTests.java:173)
+
+However, there were exactly 4 interactions with this mock:
+serverConnection.connectTo(&quot;s&quot;);
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:32)
+
+serverConnection.requestFileContents(&quot;f&quot;);
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:33)
+
+serverConnection.moreBytes();
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:35)
+
+serverConnection.read();
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:36)
+
+
+	at app//edu.drexel.se320.MockTests.test6(MockTests.java:173)
+</failure>
+  </testcase>
+  <testcase name="test7()" classname="edu.drexel.se320.MockTests" time="0.005"/>
+  <testcase name="test8()" classname="edu.drexel.se320.MockTests" time="0.001"/>
+  <testcase name="test9()" classname="edu.drexel.se320.MockTests" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (C:\Users\sshab\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.17.7\fbf3d6d649ed37fc9e9c59480a05be0a26e3c2da\byte-buddy-agent-1.17.7.jar)
