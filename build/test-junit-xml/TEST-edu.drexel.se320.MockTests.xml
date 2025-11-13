@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.drexel.se320.MockTests" tests="16" skipped="0" failures="2" errors="0" timestamp="2025-11-13T02:42:19.085Z" hostname="SAMIIWORKAHOLIC" time="0.564">
+<testsuite name="edu.drexel.se320.MockTests" tests="16" skipped="0" failures="2" errors="0" timestamp="2025-11-13T02:43:40.735Z" hostname="SAMIIWORKAHOLIC" time="0.573">
   <properties/>
-  <testcase name="test10a()" classname="edu.drexel.se320.MockTests" time="0.444"/>
-  <testcase name="test10b()" classname="edu.drexel.se320.MockTests" time="0.006"/>
+  <testcase name="test10a()" classname="edu.drexel.se320.MockTests" time="0.447"/>
+  <testcase name="test10b()" classname="edu.drexel.se320.MockTests" time="0.005"/>
   <testcase name="test10c()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="test10d()" classname="edu.drexel.se320.MockTests" time="0.001"/>
+  <testcase name="test10d()" classname="edu.drexel.se320.MockTests" time="0.002"/>
   <testcase name="test10e()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="testMockDemo()" classname="edu.drexel.se320.MockTests" time="0.078"/>
+  <testcase name="testMockDemo()" classname="edu.drexel.se320.MockTests" time="0.084"/>
   <testcase name="test1()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="test2()" classname="edu.drexel.se320.MockTests" time="0.006">
+  <testcase name="test2()" classname="edu.drexel.se320.MockTests" time="0.007">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;null&gt; but was: &lt;&gt;
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
 	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
@@ -19,33 +19,33 @@
 	at app//edu.drexel.se320.MockTests.test2(MockTests.java:127)
 </failure>
   </testcase>
-  <testcase name="test3()" classname="edu.drexel.se320.MockTests" time="0.003"/>
+  <testcase name="test3()" classname="edu.drexel.se320.MockTests" time="0.004"/>
   <testcase name="test4()" classname="edu.drexel.se320.MockTests" time="0.001"/>
   <testcase name="test5()" classname="edu.drexel.se320.MockTests" time="0.001"/>
-  <testcase name="test6()" classname="edu.drexel.se320.MockTests" time="0.009">
-    <failure message="Wanted but not invoked:&#10;serverConnection.closeConnection();&#10;-&gt; at edu.drexel.se320.MockTests.test6(MockTests.java:219)&#10;&#10;However, there were exactly 4 interactions with this mock:&#10;serverConnection.connectTo(&quot;s&quot;);&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:66)&#10;&#10;serverConnection.requestFileContents(&quot;f&quot;);&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:67)&#10;&#10;serverConnection.moreBytes();&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:69)&#10;&#10;serverConnection.read();&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:70)&#10;&#10;" type="org.mockito.exceptions.verification.WantedButNotInvoked">Wanted but not invoked:
+  <testcase name="test6()" classname="edu.drexel.se320.MockTests" time="0.008">
+    <failure message="Wanted but not invoked:&#10;serverConnection.closeConnection();&#10;-&gt; at edu.drexel.se320.MockTests.test6(MockTests.java:219)&#10;&#10;However, there were exactly 4 interactions with this mock:&#10;serverConnection.connectTo(&quot;s&quot;);&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:32)&#10;&#10;serverConnection.requestFileContents(&quot;f&quot;);&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:33)&#10;&#10;serverConnection.moreBytes();&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:35)&#10;&#10;serverConnection.read();&#10;-&gt; at edu.drexel.se320.Client.requestFile(Client.java:36)&#10;&#10;" type="org.mockito.exceptions.verification.WantedButNotInvoked">Wanted but not invoked:
 serverConnection.closeConnection();
 -&gt; at edu.drexel.se320.MockTests.test6(MockTests.java:219)
 
 However, there were exactly 4 interactions with this mock:
 serverConnection.connectTo(&quot;s&quot;);
--&gt; at edu.drexel.se320.Client.requestFile(Client.java:66)
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:32)
 
 serverConnection.requestFileContents(&quot;f&quot;);
--&gt; at edu.drexel.se320.Client.requestFile(Client.java:67)
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:33)
 
 serverConnection.moreBytes();
--&gt; at edu.drexel.se320.Client.requestFile(Client.java:69)
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:35)
 
 serverConnection.read();
--&gt; at edu.drexel.se320.Client.requestFile(Client.java:70)
+-&gt; at edu.drexel.se320.Client.requestFile(Client.java:36)
 
 
 	at app//edu.drexel.se320.MockTests.test6(MockTests.java:219)
 </failure>
   </testcase>
-  <testcase name="test7()" classname="edu.drexel.se320.MockTests" time="0.005"/>
-  <testcase name="test8()" classname="edu.drexel.se320.MockTests" time="0.002"/>
+  <testcase name="test7()" classname="edu.drexel.se320.MockTests" time="0.004"/>
+  <testcase name="test8()" classname="edu.drexel.se320.MockTests" time="0.001"/>
   <testcase name="test9()" classname="edu.drexel.se320.MockTests" time="0.001"/>
   <testcase name="testServerConnectionFailureGivesNull()" classname="edu.drexel.se320.MockTests" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
