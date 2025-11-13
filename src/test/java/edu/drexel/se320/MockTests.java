@@ -365,10 +365,10 @@ public class MockTests {
         ServerConnection sc = mock(ServerConnection.class);
         when(sc.connectTo("s")).thenReturn(true);
         when(sc.requestFileContents("f")).thenReturn(true);
-        when(sc.moreBytes()).thenReturn(false); // no reads, still closes
+        when(sc.moreBytes()).thenReturn(false); 
         doThrow(new IOException()).when(sc).closeConnection();
         Client c = new Client(sc);
 
-        assertNull(c.requestFile("s", "f")); // Client catches and returns null
+        assertNull(c.requestFile("s", "f")); 
     }
 }
